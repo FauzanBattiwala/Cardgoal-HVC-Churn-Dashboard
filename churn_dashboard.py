@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 # Step 1: Load and Clean the Data (updated path)
-df = pd.read_excel(r'C:\Users\fauza\Desktop\Master_Raw_Data(Sept-Oct).xlsx', sheet_name='Sept- Oct')
+df = pd.read_excel('Master_Raw_Data(Sept-Oct).xlsx', sheet_name='Sept- Oct')
 df['Creation Time'] = pd.to_datetime(df['Creation Time'])
 df['Completion Time'] = pd.to_datetime(df['Completion Time'])
 df['Is_Completed'] = (df['Actual Value'] > 0).astype(int)
@@ -101,4 +101,5 @@ for insight in insights:
 # Export Churned Users CSV
 st.header('Export')
 csv = hvc_df[hvc_df['Is_Churn'] == 1].to_csv(index=False).encode('utf-8')
+
 st.download_button(label="Download Churned HVCs CSV", data=csv, file_name='churned_hvcs.csv')
